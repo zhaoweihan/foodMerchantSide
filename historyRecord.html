@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>历史记录</title>
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/record.css" />
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">历史记录</h1>
+		</header>
+		<div class="mui-content mui-scroll-wrapper" id="refreshContainer">
+			<div class="mui-scroll">
+				<ul class="mui-table-view" id="dateList">
+					<li class="mui-table-view-cell"></li>
+				</ul>
+				<div class="resultBox">
+					<div class="number">
+						<span>到店人数</span>
+						<span id="peopleNum">0</span>
+					</div>
+					<div class="Sales">
+						<span>销售额</span>
+						<span><em id="profit">0</em>元</span>
+					</div>
+					<div class="cost">
+						<span>成本</span>
+						<span><em id="cost">0</em>元</span>
+					</div>
+				</div>
+				<!--列表-->
+				<ul class="mui-table-view mui-table-view-chevron recordList" id="hisRecordList">
+					<!--<li class="mui-table-view">
+					<span>188****3034</span>
+					<span class="flex2">双人套餐</span>
+					<span>¥80元</span>
+					<span class="flex2">成本30元</span>
+				</li>-->
+				</ul>
+				<button type="button" class="mui-btn mui-btn-primary" id="submitAgain" class="submitAgain">下拉再次请求</button>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/zepto-1.2.0.min.js"></script>
+		<script src="js/ChengPinJia.js"></script>
+		<script src="js/record.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack: true, //启用右滑关闭功能
+				pullRefresh: {
+					container: "#refreshContainer", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+					down: {
+						height: 50, //可选,默认50.触发下拉刷新拖动距离,
+						auto: false, //可选,默认false.自动下拉刷新一次
+						contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+						contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+						contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+						callback: function() {
+								var self = plus.webview.currentWebview();
+								getDateProfit(self.fullYear + "-" + self.month + "-" + self.date, "peopleNum", "profit", "cost");
+								getRecordList(self.fullYear + "-" + self.month + "-" + self.date, "hisRecordList");
+							} //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					}
+				}
+			});
+			mui.plusReady(function() {
+				//检测是否登录
+				cpj.isLogin();
+				var self = plus.webview.currentWebview();
+				getDateProfit(self.fullYear + "-" + self.month + "-" + self.date, "peopleNum", "profit", "cost");
+				getRecordList(self.fullYear + "-" + self.month + "-" + self.date, "hisRecordList");
+				
+				$("#dateList li").html(self.fullYear+"-"+self.month+"-"+self.date);
+			});
+		</script>
+	</body>
+
+</html>

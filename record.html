@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>记录</title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/record.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">记录</h1>
+		</header>
+		<!--<div class="mui-content mui-scroll-wrapper" id="refreshContainer">
+			<div class="mui-scroll">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right chooseDatetime">
+							<span class="mui-icon iconfont icon-rili"></span> 选择查询日期
+						</a>
+					</li>
+				</ul>
+
+				<ul class="mui-table-view  mui-table-view-chevron recordList" id="recordList"></ul>
+				<button type="button" class="mui-btn mui-btn-primary" id="submitAgain" class="submitAgain">下拉再次请求</button>
+			</div>
+		</div>-->
+		<script src="js/mui.min.js"></script>
+		<script src="js/zepto-1.2.0.min.js"></script>
+		<script src="js/ChengPinJia.js"></script>
+		<!--<script src="js/record.js"></script>-->
+		<script type="text/javascript">
+			mui.init({
+				keyEventBind: {
+					backbutton: false //关闭back按键监听
+				},
+				subpages: [{
+					url: "recordList.html", //下拉刷新内容页面地址
+					id: "recordList", //内容页面标志
+					styles: {
+						top: "45px", //内容页面顶部位置,需根据实际页面布局计算，若使用标准mui导航，顶部默认为48px；
+					}
+				}]
+			});
+		</script>
+	</body>
+
+</html>

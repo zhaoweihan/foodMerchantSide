@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>找回密码</title>
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+		<style type="text/css">
+			html,
+			body {
+				height: 100%;
+				background: #fff;
+			}
+			
+			body {
+				background: url(img/loginBg.png) no-repeat;
+				background-size: 100% 70%;
+				background-position: 0 100%;
+			}
+			
+			.mui-content {
+				background: none;
+			}
+			
+			.mui-input-group {
+				margin-top: 35%;
+				background: none;
+			}
+			
+			.mui-input-group:before,
+			.mui-input-group:after {
+				content: '';
+				display: none;
+			}
+			
+			.mui-input-group .findPwSubmit {
+				width: 80%;
+				height: 50px;
+				margin-left: 10%;
+				border: 0;
+				background: #C8A676;
+				border-radius: 5px;
+				margin-top: 10%;
+				font-size: 18px;
+			}
+			
+			@media only screen and (min-width: 100px) and (max-width: 321px) {
+				.mui-input-group .findPwSubmit {
+					width: 80%;
+					height: 50px;
+					margin-left: 10%;
+					border: 0;
+					background: #C8A676;
+					border-radius: 5px;
+					margin-top: 30%;
+				}
+				.mui-input-group .findPwSubmit {
+					width: 80%;
+					height: 50px;
+					margin-left: 10%;
+					border: 0;
+					background: #C8A676;
+					border-radius: 5px;
+					margin-top: 15%;
+				}
+			}
+			
+			#vCode {
+				width: 130px;
+				float: left;
+			}
+			
+			.getVcode {
+				position: absolute;
+				top: 5px;
+				right: 5px;
+				border: 0;
+				background: #C8A676;
+				color: #fff;
+				font-size: 14px;
+				height: 31px;
+				z-index: 5;
+			}
+			@keyframes loading{
+				0%{
+					transform: rotate(0deg);
+				}
+				100%{
+					transform: rotate(360deg);
+				}
+			}
+			.getVcode i{
+				position: absolute;
+				left: 50%;
+				margin-left: -9px;
+				top: 8px;
+				display: block;
+				animation: loading .5s infinite linear;
+				z-index: 15;
+				color: #fff;
+			}
+			#vCode+.mui-icon-clear{
+				right: 100px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">找回密码</h1>
+		</header>
+		<div class="mui-content">
+			<form class="mui-input-group" onsubmit="return false;">
+				<div class="mui-input-row">
+					<label for="phone">手机号</label>
+					<input type="tel" id="phone" pattern="[0-9]*" class="mui-input-clear" placeholder="请输入手机号" maxlength="11">
+				</div>
+				<div class="mui-input-row">
+					<label for="vCode">验证码</label>
+					<input type="tel" id="vCode" pattern="[0-9]*" class="mui-input-clear" placeholder="请输入验证码" maxlength="6">
+					<button type="button" class="getVcode" id="getVcode">获取验证码</button>
+				</div>
+				<div class="mui-input-row">
+					<label for="password">密码</label>
+					<input type="password" id="password" class="mui-input-clear" placeholder="请输入密码" maxlength="18">
+				</div>
+				<div class="mui-input-row">
+					<label for="retPw">确认密码</label>
+					<input type="password" id="retPw" class="mui-input-clear" placeholder="请输入确认密码" maxlength="18">
+				</div>
+				<input type="submit" value="确定修改并登录" class="findPwSubmit" id="findPwSubmit"/>
+			</form>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/zepto-1.2.0.min.js"></script>
+		<script src="js/ChengPinJia.js" ></script>
+		<script src="js/login.js" ></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			(function($,mui) {
+				mui.plusReady(function() {
+					/*
+					 * 发送验证码
+					 */
+					mui(".mui-input-group").on("tap", ".getVcode", function() {
+						if(phoneRex.test($("#phone").val())) {
+							$("#getVcode").css("color","#C8A676").append('<i class="mui-icon iconfont icon-loading"></i>').addClass("loading");
+							cpj.ajax({
+								url:"/account/getVerificationCode.json",
+								data:{
+									flag:4,
+									mobilePhone:$("#phone").val()
+								},
+								success:function(data){
+									$("#getVcode i").remove();
+									$("#getVcode").css("color","#fff");
+									cpj.vCodeCountdown("getVcode");
+								},
+								error:function(code,msg){
+									$("#getVcode i").remove();
+									$("#getVcode").css("color","#fff");
+									mui.toast(msg);
+								}
+							});
+						} else if($("#phone").val() == "") {
+							mui.toast("请输入手机号");
+						} else {
+							mui.toast("手机号格式不正确");
+						}
+					});
+					/*
+					 * 修改并登录
+					 */
+					mui(".mui-input-group").on("tap", "#findPwSubmit", function() {
+						checkFindPw();
+					});
+					
+				});
+
+			})(Zepto,mui);
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/record.css" />
+	</head>
+
+	<body>
+		<div class="mui-content mui-scroll-wrapper" id="refreshContainer">
+			<div class="mui-scroll">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right chooseDatetime">
+							<span class="mui-icon iconfont icon-rili"></span> 选择查询日期
+						</a>
+					</li>
+				</ul>
+
+				<ul class="mui-table-view  mui-table-view-chevron recordList" id="recordList">
+					<!--<li class="mui-table-view">
+					<span>188****3034</span>
+					<span class="flex2">双人套餐</span>
+					<span>¥80元</span>
+					<span class="flex2">成本30元</span>
+						</li>-->
+				</ul>
+				<button type="button" class="mui-btn mui-btn-primary" id="submitAgain" class="submitAgain">下拉再次请求</button>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/zepto-1.2.0.min.js"></script>
+		<script type="text/javascript" src="js/ChengPinJia.js"></script>
+		<script type="text/javascript" src="js/record.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				keyEventBind: {
+					backbutton: false //关闭back按键监听
+				},
+				pullRefresh: {
+					container: "#refreshContainer", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+					down: {
+						height: 50, //可选,默认50.触发下拉刷新拖动距离,
+						auto: false, //可选,默认false.自动下拉刷新一次
+						contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+						contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+						contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+						callback: function() {
+								var refreshDate = new Date();
+								getRecordList(refreshDate.getFullYear() + "-" + (refreshDate.getMonth() + 1) + "-" + refreshDate.getDate(), "recordList");
+							} //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					}
+				}
+			})
+			mui.plusReady(function() {
+				var nowDate = new Date();
+				//渲染数据
+				getRecordList(nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate(), "recordList");
+				/*
+				 * 日期选择框
+				 */
+				mui(".mui-table-view").on("tap", ".chooseDatetime", function() {
+					var dDate = new Date();
+					dDate.setFullYear(nowDate.getFullYear(), nowDate.getMonth(), (nowDate.getDate() - 3));
+					var minDate = new Date();
+					minDate.setFullYear(2016, 5, 1);
+					var maxDate = new Date();
+					maxDate.setFullYear(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate());
+					plus.nativeUI.pickDate(function(e) {
+						var d = e.date;
+						//跳转历史记录页
+						mui.openWindow({
+							url: "historyRecord.html",
+							extras: {
+								fullYear: d.getFullYear(),
+								month: (d.getMonth() + 1),
+								date: d.getDate()
+							}
+						});
+
+					}, function(e) {
+						//info.innerText = "您没有选择日期";
+					}, {
+						title: "请选择日期",
+						date: dDate,
+						minDate: minDate,
+						maxDate: maxDate
+					});
+				});
+
+			});
+		</script>
+	</body>
+
+</html>

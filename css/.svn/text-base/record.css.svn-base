@@ -1,0 +1,88 @@
+html,
+body {
+	height: 100%;
+	background: #fff;
+}
+
+em,
+i {
+	font-style: normal;
+}
+
+.mui-content {
+	background: #fff;
+}
+
+.resultBox {
+	display: flex;
+	display: -webkit-flex;
+	width: 100%;
+	height: 110px;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.resultBox>div {
+	position: relative;
+	flex: 1;
+	height: 100%;
+}
+
+.resultBox>div:nth-of-type(1):after,
+.resultBox>div:nth-of-type(2):after {
+	content: '';
+	position: absolute;
+	top: 15%;
+	right: 0;
+	height: 70%;
+	width: 1px;
+	background: #f0f0f0;
+}
+
+.resultBox>div span {
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+}
+
+.resultBox>div span:first-of-type {
+	margin-top: 34px;
+}
+
+.resultBox>div span:last-of-type {
+	margin-top: 5px;
+}
+
+.recordList li {
+	display: flex;
+	display: -webkit-flex;
+	font-size: 15px;
+	padding: 12px 10px;
+}
+
+.recordList li span {
+	display: inline-block;
+	text-align: center;
+	flex: 1;
+}
+
+.recordList li span:first-of-type {
+	margin-right: 2px;
+}
+
+.recordList li .flex2 {
+	flex: 2;
+}
+
+#submitAgain {
+	position: absolute;
+	left: 50%;
+	margin-left: -41px;
+	margin-top: 10px;
+	display: none;
+}
+
+.chooseDatetime span.icon-rili {
+	color: #c4a374;
+	margin-right: 2px;
+	font-size: 22px;
+}

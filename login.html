@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>登录</title>
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+		<style type="text/css">
+			html,
+			body {
+				height: 100%;
+				background: #fff;
+			}
+			
+			body {
+				background: url(img/loginBg.png) no-repeat;
+				background-size: 100% 70%;
+				background-position: 0 100%;
+			}
+			
+			.mui-content {
+				background: none;
+			}
+			
+			.mui-input-group {
+				margin-top: 35%;
+				background: none;
+			}
+			
+			.mui-input-group:before,
+			.mui-input-group:after {
+				content: '';
+				display: none;
+			}
+			
+			.mui-input-group .loginSubmit {
+				width: 80%;
+				height: 50px;
+				margin-left: 10%;
+				border: 0;
+				background: #C8A676;
+				border-radius: 5px;
+				margin-top: 10%;
+				font-size: 18px;
+			}
+			
+			@media only screen and (min-width: 100px) and (max-width: 321px) {
+				.mui-input-group .loginSubmit {
+					width: 80%;
+					height: 50px;
+					margin-left: 10%;
+					border: 0;
+					background: #C8A676;
+					border-radius: 5px;
+					margin-top: 30%;
+				}
+				.mui-input-group .loginSubmit {
+					width: 80%;
+					height: 50px;
+					margin-left: 10%;
+					border: 0;
+					background: #C8A676;
+					border-radius: 5px;
+					margin-top: 15%;
+				}
+			}
+			
+			.findPw {
+				width: 100%;
+				text-align: center;
+				color: #666;
+				margin-top: 30px;
+			}
+			
+			.mui-input-row .mui-icon-clear {
+				right: 25px !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">登录</h1>
+		</header>
+		<div class="mui-content">
+			<form class="mui-input-group" onsubmit="return false;">
+				<div class="mui-input-row">
+					<label for="phone">手机号</label>
+					<input type="tel" id="phone" pattern="[0-9]*" class="mui-input-clear" placeholder="请输入手机号" maxlength="11">
+				</div>
+				<div class="mui-input-row">
+					<label for="password">密码</label>
+					<input type="password" id="password" class="mui-input-password mui-input-clear" placeholder="请输入密码" maxlength="18">
+				</div>
+				<input type="submit" value="登 录" class="loginSubmit" />
+				<div class="findPw"><span id="findPw">找回密码</span></div>
+			</form>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/zepto-1.2.0.min.js"></script>
+		<script src="js/ChengPinJia.js"></script>
+		<script src="js/login.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				keyEventBind: {
+					backbutton: false //关闭back按键监听
+				}
+			});
+			(function($, mui) {
+
+				mui.plusReady(function() {
+
+					plus.webview.close("tab-webview");
+					mui(".mui-input-group").on("tap", "#findPw", function() {
+						mui.openWindow({
+							url: "findPw.html",
+						});
+					});
+					mui(".mui-input-group").on("tap", ".loginSubmit", function() {
+						goLogin();
+					});
+
+					$("#password").keyup(function(e) {
+						if(e.which == 13) {
+							$(this).blur();
+							goLogin();
+						}
+					});
+				});
+			})(Zepto, mui);
+		</script>
+	</body>
+
+</html>

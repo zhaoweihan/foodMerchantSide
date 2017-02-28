@@ -1,0 +1,147 @@
+{
+  "tab-webviewe.html": {
+    "resources": [
+      "index.html",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/barTab.js",
+      "scanCode.html",
+      "css/iconfont.css",
+      "fonts/iconfont.ttf"
+    ],
+    "refer": [
+      "record.html",
+      "index.html",
+      "account.html",
+      "scanCode.html"
+    ]
+  },
+  "account.html": {
+    "resources": [
+      "fonts/mui.ttf",
+      "js/mui.min.js",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "js/ChengPinJia.js",
+      "js/zepto-1.2.0.min.js"
+    ],
+    "refer": [
+      "aboutUs.html",
+      "changePassword.html",
+      "login.html"
+    ]
+  },
+  "scanCode.html": {
+    "resources": [
+      "js/scanCode.js",
+      "js/record.js",
+      "js/couponCodeSure.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "js/ChengPinJia.js",
+      "js/zepto-1.2.0.min.js"
+    ],
+    "refer": [
+      "couponCode.html"
+    ]
+  },
+  "record.html": {
+    "resources": [
+      "fonts/mui.ttf",
+      "js/record.js",
+      "css/record.css",
+      "fonts/iconfont.ttf",
+      "js/mui.min.js",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "js/ChengPinJia.js",
+      "js/zepto-1.2.0.min.js",
+      "recordList.html"
+    ],
+    "refer": [
+      "historyRecord.html",
+      "recordList.html"
+    ]
+  },
+  "aboutUs.html": {
+    "resources": [
+      "img/logo@2x.png",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/iconfont.css",
+      "css/mui.min.css"
+    ]
+  },
+  "changePassword.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "js/ChengPinJia.js",
+      "js/zepto-1.2.0.min.js"
+    ]
+  },
+  "tab-webview.html": {
+    "resources": [
+      "scanCode.html",
+      "js/mui.min.js",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "js/ChengPinJia.js",
+      "fonts/iconfont.ttf",
+      "js/zepto-1.2.0.min.js",
+      "js/barTab.js"
+    ],
+    "refer": [
+      "record.html",
+      "account.html",
+      "scanCode.html",
+      "login.html"
+    ]
+  },
+  "login.html": {
+    "resources": [
+      "img/loginBg.png",
+      "js/login.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "js/ChengPinJia.js",
+      "js/zepto-1.2.0.min.js"
+    ],
+    "refer": [
+      "tab-webview.html"
+    ]
+  },
+  "historyRecord.html": {
+    "resources": [
+      "js/mui.min.js",
+      "css/record.css",
+      "fonts/mui.ttf",
+      "js/record.js",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "js/ChengPinJia.js",
+      "js/zepto-1.2.0.min.js"
+    ]
+  },
+  "recordList.html": {
+    "resources": [
+      "fonts/mui.ttf",
+      "fonts/iconfont.ttf",
+      "js/mui.min.js",
+      "css/record.css",
+      "js/record.js",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "js/ChengPinJia.js",
+      "js/zepto-1.2.0.min.js"
+    ],
+    "refer": [
+      "historyRecord.html"
+    ]
+  }
+}
